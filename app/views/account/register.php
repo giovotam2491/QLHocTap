@@ -42,32 +42,32 @@
                                 <!-- Sửa action="/Account/save" -->
                                 <form method="POST" action="/QLHocTap/account/save">
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="username">Tài khoản</label>
+                                        <label class="form-label" for="username">Tài khoản:</label>
                                         <input type="text" id="username" name="username" class="form-control form-control-lg" required />
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="fullname">Họ và tên</label>
+                                        <label class="form-label" for="fullname">Họ và tên:</label>
                                         <input type="text" id="fullname" name="fullname" class="form-control form-control-lg" required />
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="phone">Số điện thoại</label>
+                                        <label class="form-label" for="phone">Số điện thoại:</label>
                                         <input type="text" id="phone" name="phone" class="form-control form-control-lg" required />
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="email">Email</label>
+                                        <label class="form-label" for="email">Email:</label>
                                         <input type="email" id="email" name="email" class="form-control form-control-lg" required />
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="password">Mật khẩu</label>
+                                        <label class="form-label" for="password">Mật khẩu:</label>
                                         <input type="password" id="password" name="password" class="form-control form-control-lg" required />
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="confirmpassword">Nhập lại mật khẩu</label>
+                                        <label class="form-label" for="confirmpassword">Nhập lại mật khẩu:</label>
                                         <input type="password" id="confirmpassword" name="confirmpassword" class="form-control form-control-lg" required />
                                     </div>
 
@@ -79,7 +79,7 @@
 
                                     <p class="text-center text-muted mt-5 mb-0">
                                         Bạn đã có tài khoản? 
-                                        <a href="/QLHocTap/account/login" class="fw-bold text-body"><u>Đăng nhập</u></a>
+                                        <a href="/QLHocTap" class="fw-bold text-body"><u>Đăng nhập</u></a>
                                     </p>
                                 </form>
 

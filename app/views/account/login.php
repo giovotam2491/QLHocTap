@@ -37,19 +37,18 @@
               <div class="col-lg-6">
                 <div class="card-body p-md-5 mx-md-4">
                   <div class="text-center">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
-                      style="width: 185px;" alt="logo">
+                    <img src="uploads/logo.png" style="width: 185px;" alt="logo.png">
                     <h4 class="mt-1 mb-5 pb-1">We are The Flash Team</h4>
                   </div>
                   <!-- Thêm action và method để giữ chức năng đăng nhập -->
                   <form action="/QLHocTap/account/checklogin" method="post">
                     <p>Hãy đăng nhập tài khoản của bạn</p>
                     <div class="form-outline mb-4">
-                      <label class="form-label" for="form2Example11">Tài Khoản</label>
-                      <input type="text" id="form2Example11" name="username" class="form-control" placeholder="Số điện thoại hoặc email" required />
+                      <label class="form-label" for="form2Example11">Tài Khoản:</label>
+                      <input type="text" id="form2Example11" name="username" class="form-control" placeholder="" required />
                     </div>
                     <div class="form-outline mb-4">
-                      <label class="form-label" for="form2Example22">Mật Khẩu</label>
+                      <label class="form-label" for="form2Example22">Mật Khẩu:</label>
                       <input type="password" id="form2Example22" name="password" class="form-control" required />
                     </div>
                     <div class="text-center pt-1 mb-5 pb-1">

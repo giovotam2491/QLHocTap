@@ -1,16 +1,18 @@
+<?php if (session_status() !== PHP_SESSION_ACTIVE) {session_start();} ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Các thẻ meta, CSS như cũ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>Header Example</title>
+    <title>Quản Lý Học Tập Trực Tuyến</title>
     <style>
         .header {
-            background-color: #151515; /* Dark background */
+            background-color: #151515;
         }
         .btn-yellow {
-            background-color: #FFC107; /* Sign-up Button Color */
+            background-color: #FFC107;
             color: black;
         }
         .navbar-nav .nav-item .nav-link:hover {
@@ -24,52 +26,47 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark header">
-    <a class="navbar-brand" href="#">
-        <img src="path_to_logo.png" alt="Logo" style="width: 40px; height: 40px;">
-        My Learning Platform
+    <a class="navbar-brand" href="/QLHocTap">
+        <img src="uploads/logo.png" alt="Logo" style="width: 40px; height: 40px;">
+        Quản Lý Học Tập
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="/QLHocTap">Trang chủ</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="#">Hồ sơ</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link" href="#">Khoá Học</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">FAQs</a>
+                <a class="nav-link" href="#">Bài Tập</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="#">Điểm</a>
             </li>
             <li class="nav-item">
-          <?php
-          if (SessionHelper::isLoggedIn()) {
-            echo "<a class='navlink'>" . $_SESSION['username'] . "</a>";
-          } else {
-            echo "<a class='nav-link'href='/webbanhang/account/login'>Login</a>";
-          }
-          ?>
-        </li>
-        <li class="nav-item">
-          </a>
-          <?php
-          if (SessionHelper::isLoggedIn()) {
-            echo "<a class='nav-link' href='/webbanhang/account/logout'>Logout</a>";
-          }
-          ?>
-        </li>
+                <a class="nav-link" href="#">Tham Gia Khoá Học</a>
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-2" type="search" placeholder="Search..." aria-label="Search">
-            <a href="/QLHocTap" class="btn btn-outline-light my-2 my-sm-0">Login</a>
-            <a href="account/register" class="btn btn-outline-warning my-2 my-sm-0 ml-2">Sign-up</a>
+            <?php if(isset($_SESSION['user'])): ?>
+                <!-- Nếu đã đăng nhập -->
+                <span class="navbar-text mr-2">
+                    Chào, <?php echo htmlspecialchars($_SESSION['user']['full_name']); ?>
+                </span>
+                <a href="/QLHocTap/account/logout" class="btn btn-outline-light my-2 my-sm-0">Logout</a>
+            <?php else: ?>
+                <!-- Nếu chưa đăng nhập -->
+                <a href="/QLHocTap/account/login" class="btn btn-outline-light my-2 my-sm-0">Login</a>
+                <a href="/QLHocTap/account/register" class="btn btn-outline-warning my-2 my-sm-0 ml-2">Sign-up</a>
+            <?php endif; ?>
         </form>
     </div>
 </nav>
