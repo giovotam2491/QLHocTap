@@ -71,31 +71,4 @@ class AccountController
         require_once 'app/views/account/login.php';
     }
 
-    public function checkLogin()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $username = $_POST['username'] ?? '';
-            $password = $_POST['password'] ?? '';
-
-            // Lấy tài khoản từ DB
-            $account = $this->model->getAccountByUsername($username);
-            
-            // Nếu tài khoản tồn tại
-            if ($account) {
-                // Kiểm tra mật khẩu
-                if (password_verify($password, $account->password)) {
-                    // Đăng nhập thành công, tạo session
-                    session_start();
-                    $_SESSION['username'] = $account->username;
-                    $_SESSION['role'] = $account->role; // Lưu role vào session (nếu có)
-                    header('Location: /QLHocTap');
-                    exit;
-                } else {
-                    echo "Password incorrect.";
-                }
-            } else {
-                echo "Account not found.";
-            }
-        }
-    }
 }
