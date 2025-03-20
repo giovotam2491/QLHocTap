@@ -100,6 +100,19 @@ class AccountModel
 
         return "success";
     }
+    public function getAccountById($user_id) {
+        $sql = "SELECT * FROM users WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$user_id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // Cập nhật thông tin tài khoản (full_name, phone, email)
+    public function updateProfile($user_id, $full_name, $phone, $email) {
+        $sql = "UPDATE users SET full_name = ?, phone = ?, email = ? WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([$full_name, $phone, $email, $user_id]);
+    }
 
 
 }

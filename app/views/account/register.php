@@ -79,7 +79,7 @@
 
                                     <p class="text-center text-muted mt-5 mb-0">
                                         Bạn đã có tài khoản? 
-                                        <a href="/QLHocTap" class="fw-bold text-body"><u>Đăng nhập</u></a>
+                                        <a href="/QLHocTap/account/login" class="fw-bold text-body"><u>Đăng nhập</u></a>
                                     </p>
                                 </form>
 

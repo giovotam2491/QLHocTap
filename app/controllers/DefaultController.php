@@ -1,11 +1,8 @@
 <?php
 class DefaultController {
     public function index() {
-        $this->home(); // Gọi trang login mặc định
+        include_once "app/views/shares/startpage.php";
     }
 
-    public function home() {
-        include_once "app/views/account/login.php";
-    }
 }
 ?>

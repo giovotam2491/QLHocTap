@@ -1,4 +1,5 @@
 <?php if (session_status() !== PHP_SESSION_ACTIVE) {session_start();} ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +28,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark header">
     <a class="navbar-brand" href="/QLHocTap">
-        <img src="uploads/logo.png" alt="Logo" style="width: 40px; height: 40px;">
+        <img src="https://i.pinimg.com/736x/1e/c5/5d/1ec55d2107231cf6e355099648586c50.jpg" alt="Logo" style="width: 40px; height: 40px;">
         Quản Lý Học Tập
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
@@ -36,11 +37,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
+        <?php if(isset($_SESSION['user'])): ?>
             <li class="nav-item">
-                <a class="nav-link" href="/QLHocTap">Trang chủ</a>
+                <a class="nav-link" href="/QLHocTap/shares/homepage">Trang chủ</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Hồ sơ</a>
+                <a class="nav-link" href="/QLHocTap/account/profile">Hồ sơ</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Khoá Học</a>
@@ -54,7 +56,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Tham Gia Khoá Học</a>
             </li>
-        </ul>
+        <?php endif; ?>
+    </ul>
+
         <form class="form-inline my-2 my-lg-0">
             <?php if(isset($_SESSION['user'])): ?>
                 <!-- Nếu đã đăng nhập -->

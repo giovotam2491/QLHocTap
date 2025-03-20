@@ -37,12 +37,12 @@
               <div class="col-lg-6">
                 <div class="card-body p-md-5 mx-md-4">
                   <div class="text-center">
-                    <img src="uploads/logo.png" style="width: 185px;" alt="logo.png">
+                    <img src="https://i.pinimg.com/736x/1e/c5/5d/1ec55d2107231cf6e355099648586c50.jpg" style="width: 185px;" alt="logo.png">
                     <h4 class="mt-1 mb-5 pb-1">We are The Flash Team</h4>
                   </div>
                   <!-- Thêm action và method để giữ chức năng đăng nhập -->
                   <form action="/QLHocTap/account/checklogin" method="post">
-                    <p>Hãy đăng nhập tài khoản của bạn</p>
+                    <p><b>Hãy đăng nhập tài khoản của bạn</b></p>
                     <div class="form-outline mb-4">
                       <label class="form-label" for="form2Example11">Tài Khoản:</label>
                       <input type="text" id="form2Example11" name="username" class="form-control" placeholder="" required />
@@ -57,7 +57,7 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-center pb-4">
                       <p class="mb-0 me-2">Bạn chưa có tài khoản?</p>
-                      <a href="/QLHocTap/account/register" class="btn btn-outline-danger">Tạo tài khoản</a>
+                      <a href="/QLHocTap/account/register" class="btn btn-outline-danger my-2 my-sm-0 ml-2">Tạo tài khoản</a>
                     </div>
                   </form>
                 </div>
