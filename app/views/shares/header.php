@@ -48,11 +48,28 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">About</a>
             </li>
+            <li class="nav-item">
+          <?php
+          if (SessionHelper::isLoggedIn()) {
+            echo "<a class='navlink'>" . $_SESSION['username'] . "</a>";
+          } else {
+            echo "<a class='nav-link'href='/webbanhang/account/login'>Login</a>";
+          }
+          ?>
+        </li>
+        <li class="nav-item">
+          </a>
+          <?php
+          if (SessionHelper::isLoggedIn()) {
+            echo "<a class='nav-link' href='/webbanhang/account/logout'>Logout</a>";
+          }
+          ?>
+        </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-2" type="search" placeholder="Search..." aria-label="Search">
             <a href="/QLHocTap" class="btn btn-outline-light my-2 my-sm-0">Login</a>
-            <a href="app/views/account/register.php" class="btn btn-outline-warning my-2 my-sm-0 ml-2">Sign-up</a>
+            <a href="account/register" class="btn btn-outline-warning my-2 my-sm-0 ml-2">Sign-up</a>
         </form>
     </div>
 </nav>

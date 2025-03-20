@@ -1,43 +1,28 @@
 <?php
 session_start();
 require_once 'app/config/database.php';
-
-// Xử lý URL
+require_once 'app/helpers/SessionHelper.php';
+// Product/add
 $url = $_GET['url'] ?? '';
 $url = rtrim($url, '/');
 $url = filter_var($url, FILTER_SANITIZE_URL);
 $url = explode('/', $url);
-
-// Xác định controller và action
-$controllerName = isset($url[0]) && $url[0] != '' ? ucfirst($url[0]) . 'Controller' : 'DefaultController';
+// Kiểm tra phần đầu tiên của URL để xác định controller
+$controllerName = isset($url[0]) && $url[0] != '' ? ucfirst($url[0]) . 'Controller' :
+'DefaultController';
+// Kiểm tra phần thứ hai của URL để xác định action
 $action = isset($url[1]) && $url[1] != '' ? $url[1] : 'index';
-
-// Kiểm tra file controller có tồn tại không
-$controllerPath = 'app/controllers/' . $controllerName . '.php';
-if (!file_exists($controllerPath)) {
-    showErrorPage(404, "Controller '$controllerName' không tồn tại.");
+// die ("controller=$controllerName - action=$action");
+// Kiểm tra xem controller và action có tồn tại không
+if (!file_exists('app/controllers/' . $controllerName . '.php')) {
+// Xử lý không tìm thấy controller
+die('Controller not found');
 }
-
-require_once $controllerPath;
+require_once 'app/controllers/' . $controllerName . '.php';
 $controller = new $controllerName();
-
-// Kiểm tra method trong controller có tồn tại không
 if (!method_exists($controller, $action)) {
-    showErrorPage(404, "Action '$action' không tồn tại trong $controllerName.");
+// Xử lý không tìm thấy action
+die('Action not found');
 }
-
-// Gọi action với tham số còn lại
-try {
-    call_user_func_array([$controller, $action], array_slice($url, 2));
-} catch (Exception $e) {
-    showErrorPage(500, "Lỗi hệ thống: " . $e->getMessage());
-}
-
-// Hàm xử lý lỗi
-function showErrorPage($code, $message)
-{
-    http_response_code($code);
-    echo "<h2>Lỗi $code</h2><p>$message</p>";
-    exit;
-}
-?>
+// Gọi action với các tham số còn lại (nếu có)
+call_user_func_array([$controller, $action], array_slice($url, 2));
