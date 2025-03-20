@@ -53,7 +53,7 @@
                     </div>
                     <div class="text-center pt-1 mb-5 pb-1">
                       <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Đăng nhập</button>
-                      <a class="text-muted" href="#!">Quên mật khẩu?</a>
+                      <a class="text-muted" href="/QLHocTap/account/forgot_password">Quên mật khẩu?</a>
                     </div>
                     <div class="d-flex align-items-center justify-content-center pb-4">
                       <p class="mb-0 me-2">Bạn chưa có tài khoản?</p>

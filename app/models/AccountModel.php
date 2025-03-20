@@ -47,6 +47,59 @@ class AccountModel
         }
         return false;
     }
-    
+    public function storeResetToken($email, $token, $exp_time)
+    {
+        $query = "SELECT id FROM users WHERE email = :email LIMIT 1";
+        $stmt  = $this->conn->prepare($query);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        if ($stmt->rowCount() === 0) {
+            return "Email không tồn tại!";
+        }
+
+        // Xóa token cũ nếu có
+        $query = "DELETE FROM password_resets WHERE email = :email";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        // Lưu token mới
+        $query = "INSERT INTO password_resets (email, token, exp_time) VALUES (:email, :token, :exp_time)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':token', $token);
+        $stmt->bindParam(':exp_time', $exp_time);
+
+        return $stmt->execute() ? "success" : "Lỗi khi lưu token!";
+    }
+    public function updatePasswordWithToken($token, $hashedPassword)
+    {
+        $query = "SELECT email FROM password_resets WHERE token = :token AND exp_time > NOW() LIMIT 1";
+        $stmt  = $this->conn->prepare($query);
+        $stmt->bindParam(':token', $token);
+        $stmt->execute();
+
+        if ($stmt->rowCount() === 0) {
+            return "Token không hợp lệ hoặc đã hết hạn!";
+        }
+
+        $email = $stmt->fetchColumn();
+
+        $query = "UPDATE users SET password = :password WHERE email = :email";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':password', $hashedPassword);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        // Xóa token sau khi đặt lại mật khẩu thành công
+        $query = "DELETE FROM password_resets WHERE email = :email";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        return "success";
+    }
+
 
 }
