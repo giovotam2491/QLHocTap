@@ -8,30 +8,43 @@ class AccountModel
         $this->conn = $db;
     }
 
-    public function register($username, $fullname, $phone, $email, $password)
+    public function register($data)
     {
+        // Ví dụ: lấy các giá trị từ mảng $data
+        $username = $data['username'];
+        $fullname = $data['fullname'];
+        $phone    = $data['phone'];
+        $email    = $data['email'];
+        $password = $data['password'];
+        $role     = isset($data['role']) ? $data['role'] : 'student';
+        
+        // Kiểm tra tài khoản tồn tại
         $query = "SELECT id FROM users WHERE username = :username OR email = :email LIMIT 1";
         $stmt  = $this->conn->prepare($query);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
-
         if ($stmt->rowCount() > 0) {
             return "Tài khoản hoặc email đã tồn tại!";
         }
-
+        
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-        $query = "INSERT INTO users (username, password, role, full_name, phone, email) VALUES (:username, :password, 'student', :fullname, :phone, :email)";
+        
+        // Câu truy vấn INSERT
+        $query = "INSERT INTO users (username, password, role, full_name, phone, email) 
+                  VALUES (:username, :password, :role, :fullname, :phone, :email)";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':password', $hashedPassword);
+        $stmt->bindParam(':role', $role);
         $stmt->bindParam(':fullname', $fullname);
         $stmt->bindParam(':phone', $phone);
         $stmt->bindParam(':email', $email);
-
+    
         return $stmt->execute() ? "success" : "Lỗi khi tạo tài khoản!";
     }
+    
+    
     public function login($username, $password)
     {
         $query = "SELECT * FROM users WHERE username = :username LIMIT 1";
@@ -104,8 +117,9 @@ class AccountModel
         $sql = "SELECT * FROM users WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$user_id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetch(PDO::FETCH_ASSOC); // Trả về mảng hoặc false nếu không tìm thấy
     }
+    
 
     // Cập nhật thông tin tài khoản (full_name, phone, email)
     public function updateProfile($user_id, $full_name, $phone, $email) {

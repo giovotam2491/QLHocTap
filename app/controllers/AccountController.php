@@ -42,42 +42,48 @@ class AccountController
     
     public function save()
     {
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $username        = trim($_POST["username"] ?? '');
-            $fullname        = trim($_POST["fullname"] ?? '');
-            $phone           = trim($_POST["phone"] ?? '');
-            $email           = trim($_POST["email"] ?? '');
-            $password        = $_POST["password"] ?? '';
-            $confirmPassword = $_POST["confirmpassword"] ?? '';
-
-            if (empty($username) || empty($fullname) || empty($phone) || empty($email) || empty($password) || empty($confirmPassword)) {
-                echo "Vui lòng điền đầy đủ thông tin!";
-                return;
-            }
-
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Lấy dữ liệu từ form
+            $username = trim($_POST['username'] ?? '');
+            $fullname = trim($_POST['fullname'] ?? '');
+            $phone    = trim($_POST['phone'] ?? '');
+            $email    = trim($_POST['email'] ?? '');
+            $password = $_POST['password'] ?? '';
+            $confirmPassword = $_POST['confirmpassword'] ?? '';
+            $role     = $_POST['role'] ; // Mặc định là 'student'
+    
+            // Kiểm tra dữ liệu đầu vào, kiểm tra mật khẩu, v.v.
             if ($password !== $confirmPassword) {
-                echo "Mật khẩu nhập lại không khớp!";
-                return;
+                $_SESSION['error'] = "Mật khẩu không khớp!";
+                header("Location: /QLHocTap/account/register");
+                exit();
             }
-
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                echo "Email không hợp lệ!";
-                return;
-            }
-
-            $result = $this->model->register($username, $fullname, $phone, $email, $password);
-            
-            if ($result === "success") {
-                header("Location: /QLHocTap");
+    
+            // Mã hóa mật khẩu (nên sử dụng password_hash)
+            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+    
+            // Gọi model để lưu dữ liệu vào cơ sở dữ liệu
+            $result = $this->model->register([
+                'username' => $username,
+                'fullname' => $fullname,
+                'phone'    => $phone,
+                'email'    => $email,
+                'password' => $passwordHash,
+                'role'     => $role  // Lưu vai trò của người dùng
+            ]);
+    
+            if ($result) {
+                // Thành công, chuyển hướng đến trang đăng nhập hoặc trang chính
+                header("Location: /QLHocTap/account/login");
                 exit();
             } else {
-                echo $result;
+                $_SESSION['error'] = "Đăng ký thất bại, vui lòng thử lại!";
+                header("Location: /QLHocTap/account/register");
+                exit();
             }
-        } else {
-            header("Location: /QLHocTap/account/register");
-            exit();
         }
     }
+    
 
     public function checklogin()
     {
@@ -108,6 +114,8 @@ class AccountController
             exit();
         }
     }
+    
+    
     
     public function logout()
     {
@@ -156,9 +164,9 @@ class AccountController
                     $mail->setFrom('tainguyen6909@gmail.com     ', 'Mailer');
                     $mail->addAddress('taivnfire@gmail.com', 'Joe User');     //Add a recipient
                     $mail->addAddress('ellen@example.com');               //Name is optional
-                    $mail->addReplyTo('info@example.com', 'Information');
-                    $mail->addCC('cc@example.com');
-                    $mail->addBCC('bcc@example.com');
+                    // $mail->addReplyTo('info@example.com', 'Information');
+                    // $mail->addCC('cc@example.com');
+                    // $mail->addBCC('bcc@example.com');
                 
                     //Attachments
                     // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments

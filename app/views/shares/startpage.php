@@ -91,7 +91,7 @@
 <body>
     <main>
         <h2>Chào Mừng.</h2>
-        <p>Đây là trang web hộ trợ cho môi trường học tập của bạn đạt chất lượng cao hơn</p>
+        <p>Đây là trang web hỗ trợ cho môi trường học tập của bạn đạt chất lượng cao hơn</p>
         <div class="buttons">
             <a href="/QLHocTap/account/login">Bắt đầu</a>
         </div>

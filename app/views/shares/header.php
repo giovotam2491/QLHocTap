@@ -62,8 +62,11 @@
         <form class="form-inline my-2 my-lg-0">
             <?php if(isset($_SESSION['user'])): ?>
                 <!-- Nếu đã đăng nhập -->
+                <?php 
+                $roleName = ($_SESSION['user']['role'] === 'student') ? 'học sinh' : (($_SESSION['user']['role'] === 'teacher') ? 'giáo viên' : $_SESSION['user']['role']);
+                ?>
                 <span class="navbar-text mr-2">
-                    Chào, <?php echo htmlspecialchars($_SESSION['user']['full_name']); ?>
+                    Chào, <?php echo htmlspecialchars($roleName . " " . $_SESSION['user']['full_name']); ?>
                 </span>
                 <a href="/QLHocTap/account/logout" class="btn btn-outline-light my-2 my-sm-0">Logout</a>
             <?php else: ?>
