@@ -79,3 +79,4 @@
   </section>
 </body>
 </html>
+<?php include_once __DIR__ . '/../shares/footer.php'; ?>

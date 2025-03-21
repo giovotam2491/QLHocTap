@@ -39,7 +39,7 @@
         <ul class="navbar-nav mr-auto">
         <?php if(isset($_SESSION['user'])): ?>
             <li class="nav-item">
-                <a class="nav-link" href="/QLHocTap/shares/homepage">Trang chủ</a>
+                <a class="nav-link" href="/QLHocTap/homepage/homepage">Trang chủ</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/QLHocTap/account/profile">Hồ sơ</a>
