@@ -21,7 +21,8 @@
       position: relative;
       background-color: #fff;
       box-shadow: 0 0 1px 0 rgba(24, 94, 224, 0.15), 0 6px 12px 0 rgba(24, 94, 224, 0.15);
-      padding: 0.75rem;
+      padding: 0.7rem;
+      margin: 0rem 7.2rem;
       border-radius: 99px;
     }
     .tabs * { z-index: 2; }
