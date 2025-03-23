@@ -93,13 +93,9 @@
         <h2>Chào Mừng.</h2>
         <p>Đây là trang web hỗ trợ cho môi trường học tập của bạn đạt chất lượng cao hơn</p>
         <div class="buttons">
-            <a href="/QLHocTap/account/login">Bắt đầu</a>
+            <a href="/QLHocTap/homepage/homepage">Bắt đầu</a>
         </div>
     </main>
-    <div class="social-icons">
-    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-    <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-    <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
-    </div> 
+
 </body>
 </html>

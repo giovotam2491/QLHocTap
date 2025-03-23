@@ -90,30 +90,36 @@ class AccountController
         if (session_status() !== PHP_SESSION_ACTIVE) {
             session_start();
         }
-
+    
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $username = trim($_POST["username"] ?? '');
             $password = $_POST["password"] ?? '';
     
             if (empty($username) || empty($password)) {
-                echo "Vui lòng nhập đầy đủ thông tin!";
-                return;
+                $_SESSION['error'] = "Vui lòng nhập đầy đủ thông tin!";
+                header("Location: /QLHocTap/account/login");
+                exit();
             }
     
             $user = $this->model->login($username, $password);
             if ($user) {
-                // Lưu thông tin người dùng vào session
+                // Lưu thông tin người dùng vào session và xóa thông báo lỗi nếu có
                 $_SESSION['user'] = $user;
+                unset($_SESSION['error']);
                 header("Location: /QLHocTap");
                 exit();
             } else {
-                echo "Sai tài khoản hoặc mật khẩu!";
+                $_SESSION['error'] = "Sai tài khoản hoặc mật khẩu!";
+                header("Location: /QLHocTap/account/login");
+                exit();
             }
         } else {
             header("Location: /QLHocTap/account/login");
             exit();
         }
     }
+    
+    
     
     
     
